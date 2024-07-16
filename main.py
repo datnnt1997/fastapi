@@ -2,14 +2,17 @@ from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 
 import time
-
+import requests
 app = FastAPI(title=f"NewAI 🧠 - APIs")
 
 
 @app.get("/check", tags=["General"])
 async def check():
     try:
-        time.sleep(4)
+        for i in range(5):
+            time.sleep(0.5)
+            requests.get("https://google.com/")
+            print(f"Sleeping {i}")
         return JSONResponse(status_code=status.HTTP_200_OK,
                             content={"message": "NewAI APIs is running well!"})
     except Exception as e:
